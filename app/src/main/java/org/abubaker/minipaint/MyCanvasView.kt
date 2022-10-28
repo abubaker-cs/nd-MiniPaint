@@ -25,25 +25,27 @@ class MyCanvasView(context: Context) : View(context) {
 
     // Set up the paint with which to draw.
     private val paint = Paint().apply {
+
         color = drawColor
 
-        // Smooths out edges of what is drawn without affecting shape.
+        // Edge Smoothing - Smooths out edges of what is drawn without affecting shape.
         isAntiAlias = true
 
         // Dithering affects how colors with higher-precision than the device are down-sampled.
         isDither = true
 
-        // default: FILL
+        // Stroke which essentially is aligned - default: FILL / (STROKE or BOTH)
         style = Paint.Style.STROKE
 
-        // default: MITER
+        // How stroke path will be joined - default: MITER
         strokeJoin = Paint.Join.ROUND
 
-        // default: BUTT
+        // Shape of the END of the line - default: BUTT
         strokeCap = Paint.Cap.ROUND
 
-        // default: Hairline-width (really thin)
+        // Width of stroke in px - default: Hairline-width (really thin)
         strokeWidth = STROKE_WIDTH
+
     }
 
     override fun onSizeChanged(width: Int, height: Int, oldWidth: Int, oldHeight: Int) {

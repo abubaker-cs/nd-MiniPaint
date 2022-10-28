@@ -90,11 +90,16 @@ class MyCanvasView(context: Context) : View(context) {
     }
 
     override fun onDraw(canvas: Canvas) {
+
         super.onDraw(canvas)
+
+        // The 2D coordinate system used for drawing on a Canvas is in pixels,
+        // and the origin (0,0) is at the top left corner of the Canvas
         canvas.drawBitmap(extraBitmap, 0f, 0f, null)
 
         // Draw a frame around the canvas.
         canvas.drawRect(frame, paint)
+
     }
 
     /**
@@ -124,15 +129,8 @@ class MyCanvasView(context: Context) : View(context) {
 
     private fun touchUp() {
 
-        // Reset the path
+        // Reset the path so it doesn't get drawn again.
         path.reset()
-
-        //  ove to the x-y coordinates of the touch event (motionTouchEventX and motionTouchEventY
-        path.moveTo(motionTouchEventX, motionTouchEventY)
-
-        // Assign currentX and currentY to that value
-        currentX = motionTouchEventX
-        currentY = motionTouchEventY
 
     }
 
@@ -178,6 +176,13 @@ class MyCanvasView(context: Context) : View(context) {
 
         // Reset the path so it doesn't get drawn again.
         path.reset()
+
+        //  ove to the x-y coordinates of the touch event (motionTouchEventX and motionTouchEventY
+        path.moveTo(motionTouchEventX, motionTouchEventY)
+
+        // Assign currentX and currentY to that value
+        currentX = motionTouchEventX
+        currentY = motionTouchEventY
 
     }
 

@@ -3,8 +3,12 @@ package org.abubaker.minipaint
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.Canvas
+import android.graphics.Paint
 import android.view.View
 import androidx.core.content.res.ResourcesCompat
+
+// has to be float
+private const val STROKE_WIDTH = 12f
 
 class MyCanvasView(context: Context) : View(context) {
 
@@ -15,6 +19,32 @@ class MyCanvasView(context: Context) : View(context) {
     // Define a class level variable backgroundColor, for the background color of the canvas and
     // initialize it to the colorBackground you defined earlier.
     private val backgroundColor = ResourcesCompat.getColor(resources, R.color.colorBackground, null)
+
+    // For holding the color to draw with and initialize it with the colorPaint resource
+    private val drawColor = ResourcesCompat.getColor(resources, R.color.colorPaint, null)
+
+    // Set up the paint with which to draw.
+    private val paint = Paint().apply {
+        color = drawColor
+
+        // Smooths out edges of what is drawn without affecting shape.
+        isAntiAlias = true
+
+        // Dithering affects how colors with higher-precision than the device are down-sampled.
+        isDither = true
+
+        // default: FILL
+        style = Paint.Style.STROKE
+
+        // default: MITER
+        strokeJoin = Paint.Join.ROUND
+
+        // default: BUTT
+        strokeCap = Paint.Cap.ROUND
+
+        // default: Hairline-width (really thin)
+        strokeWidth = STROKE_WIDTH
+    }
 
     override fun onSizeChanged(width: Int, height: Int, oldWidth: Int, oldHeight: Int) {
         super.onSizeChanged(width, height, oldWidth, oldHeight)
